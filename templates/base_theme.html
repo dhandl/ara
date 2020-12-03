@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<!-- begin::Head -->
+<head>
+    {% block head %}
+    <meta charset="utf-8"/>
+    <title>{% block title %}{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="Dashboard of the ARA toolkit" name="description"/>
+    <meta content="David Handl" name="author"/>
+
+    <!--begin::Web font -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: { "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"] },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+    <!--end::Web font -->
+
+    <link href="{{ url_for('static', filename='theme/css/site.min.css') }}" rel="stylesheet"/>
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='theme/images/svm_run_logo.jpg') }}"/>
+    
+    <!--begin:: Global Mandatory Vendors -->
+    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" type="text/css"/>
+    <!--end:: Global Mandatory Vendors -->
+    
+    <!--begin:: Global Optional Vendors -->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/tether/dist/css/tether.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet"-->
+    <!--          type="text/css"-->
+    <!--    />-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/bootstrap-datetime-picker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet"-->
+    <!--          type="text/css"-->
+    <!--    />-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}" rel="stylesheet"-->
+    <!--          type="text/css"-->
+    <!--    />-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css') }}" rel="stylesheet"-->
+    <!--          type="text/css"-->
+    <!--    />-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css') }}" rel="stylesheet"-->
+    <!--          type="text/css"-->
+    <!--    />-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/bootstrap-select/dist/css/bootstrap-select.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/select2/dist/css/select2.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/nouislider/distribute/nouislider.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/owl.carousel/dist/assets/owl.carousel.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/owl.carousel/dist/assets/owl.theme.default.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/ion-rangeslider/css/ion.rangeSlider.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/ion-rangeslider/css/ion.rangeSlider.skinFlat.css') }}" rel="stylesheet"-->
+    <!--          type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/dropzone/dist/dropzone.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/summernote/dist/summernote.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/bootstrap-markdown/css/bootstrap-markdown.min.css') }}" rel="stylesheet"-->
+    <!--          type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/animate.css/animate.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/toastr/build/toastr.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/jstree/dist/themes/default/style.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/morris.js/morris.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/chartist/dist/chartist.min.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/socicon/css/socicon.css') }}" rel="stylesheet" type="text/css"/>-->
+        <link href="{{ url_for('static', filename='theme/theme/assets/vendors/vendors/line-awesome/css/line-awesome.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ url_for('static', filename='theme/theme/assets/vendors/vendors/flaticon/css/flaticon.css') }}" rel="stylesheet" type="text/css"/>
+    <!--    <link href="{{ url_for('static', filename='theme/theme/assets/vendors/vendors/metronic/css/styles.css') }}" rel="stylesheet" type="text/css"/>-->
+        <link href="{{ url_for('static', filename='theme/theme/assets/vendors/vendors/fontawesome5/css/all.min.css') }}" rel="stylesheet" type="text/css"/>
+    <!--end:: Global Optional Vendors -->
+
+    <!--begin::Global Theme Styles -->
+    <link href="{{ url_for('static', filename='theme/theme/assets/demo/base/style.bundle.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='theme/css/site.min.css') }}" rel="stylesheet"/>
+    <!--RTL version:<link href="assets/demo/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
+    <!--end::Global Theme Styles -->
+
+    {% endblock %}
+</head>
+<!-- end::Head -->
+
+<!-- begin::Body -->
+<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-light m-aside-left--fixed m-aside-left--offcanvas m-aside-left--minimize m-brand--minimize m-footer--push m-aside--offcanvas-default">
+
+<!-- begin:: Page -->
+<div class="m-grid m-grid--hor m-grid--root m-page">
+
+    <!-- BEGIN: Header -->
+    <header id="m_header" class="m-grid__item    m-header " m-minimize-offset="200" m-minimize-mobile-offset="200">
+        <div class="m-container m-container--fluid m-container--full-height">
+            <div class="m-stack m-stack--ver m-stack--desktop">
+
+                <!-- BEGIN: Brand -->
+                <div class="m-stack__item m-brand " style="background-color:#6610f2">
+                    <div class="m-stack m-stack--ver m-stack--general">
+                        <div class="m-stack__item m-stack__item--middle m-brand__logo">
+                            <a href="http://sv-st.margarethen.org/laufsport/" class="m-brand__logo-wrapper">
+                                <img alt="SVM" src="static/theme/images/svm_run_logo.jpg"/>
+                            </a>
+                        </div>
+                        <div class="m-stack__item m-stack__item--middle m-brand__tools">
+
+                            <!-- BEGIN: Responsive Aside Left Menu Toggler -->
+                            <a href="javascript:;" id="m_aside_left_offcanvas_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-tablet-and-mobile-inline-block">
+                                <span></span>
+                            </a>
+                            <!-- END -->
+                            
+                            <!-- BEGIN: Responsive Header Menu Toggler -->
+                            <a id="m_aside_header_menu_mobile_toggle" href="javascript:;" class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block">
+                                <span></span>
+                            </a>
+                            <!-- END: Responsive Header Menu Toggler -->
+                            
+                            <!-- BEGIN: Topbar Toggler -->
+                            <a id="m_aside_header_topbar_mobile_toggle" href="javascript:;" class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
+                                <i class="flaticon-more" style="color:white"></i>
+                            </a>
+                            <!-- END: Topbar Toggler -->
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Brand -->
+                
+                <div class="m-stack__item m-stack__item--fluid m-header-head" style="background-color:#6610f2" id="m_header_nav">
+
+                    <!-- BEGIN: Horizontal Menu -->
+
+                    <!-- BEGIN HEADER MENU -->
+                    <button class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-light " id="m_aside_header_menu_mobile_close_btn">
+                        <i class="la la-close"></i>
+                    </button>
+                    <div id="m_header_menu"
+                         class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-light m-aside-header-menu-mobile--submenu-skin-light ">
+                        <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
+                            <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" aria-haspopup="true">
+                                <a href="" class="m-menu__link m-menu__toggle" title="Training">
+                                    <span class="m-menu__item-here"></span>
+                                    <span class="m-menu__link-text">Training</span>
+                                    <i class="m-menu__hor-arrow la la-angle-down"></i>
+                                    <i class="m-menu__ver-arrow la la-angle-right"></i>
+                                </a>
+                                <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
+                                    <span class="m-menu__arrow m-menu__arrow--adjust"></span>
+                                    <ul class="m-menu__subnav">
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                            <a href="#" target="Training" class="m-menu__link ">
+                                                <i class="m-menu__link-icon flaticon-graphic">
+
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                    <span class="path4"></span>
+                                                    <span class="path5"></span>
+                                                    <span class="path6"></span>
+
+                                                </i>
+                                                <span class="m-menu__link-text">Activities</span>
+                                            </a>
+                                        </li>
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                            <a href="#" target="Training" class="m-menu__link ">
+                                                <i class="m-menu__link-icon flaticon-statistics">
+
+
+                                                </i>
+                                                <span class="m-menu__link-text">Training plan</span>
+                                            </a>
+                                        </li>
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                            <a href="#" target="Training" class="m-menu__link ">
+                                                <i class="m-menu__link-icon flaticon-line-graph">
+
+
+                                                </i>
+                                                <span class="m-menu__link-text">Summary</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click" aria-haspopup="true">
+                                <a href="" class="m-menu__link m-menu__toggle" title="Training Plan">
+                                    <span class="m-menu__item-here"></span>
+                                    <span class="m-menu__link-text">Training Plan</span>
+                                    <i class="m-menu__hor-arrow la la-angle-down"></i>
+                                    <i class="m-menu__ver-arrow la la-angle-right"></i>
+                                </a>
+                                <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
+                                    <span class="m-menu__arrow m-menu__arrow--adjust"></span>
+                                    <ul class="m-menu__subnav">
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                            <a href="#" target="Training Plan" class="m-menu__link ">
+                                                <i class="m-menu__link-icon flaticon-line-graph">
+
+
+                                                </i>
+                                                <span class="m-menu__link-text">Charts</span>
+                                            </a>
+                                        </li>
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
+                                            <a href="#" target="Training Plan" class="m-menu__link ">
+                                                <i class="m-menu__link-icon flaticon-user-settings">
+
+
+                                                </i>
+                                                <span class="m-menu__link-text">User Info</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END HEADER MENU -->
+
+                    <!-- END: Horizontal Menu -->
+
+                    <!-- BEGIN: Topbar -->
+                    <div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general">
+<!--                        <div class="m-stack__item m-stack__item&#45;&#45;middle m-dropdown m-dropdown&#45;&#45;arrow m-dropdown&#45;&#45;large m-dropdown&#45;&#45;mobile-full-width m-dropdown&#45;&#45;align-right m-dropdown&#45;&#45;skin-light m-header-search m-header-search&#45;&#45;expandable m-header-search&#45;&#45;skin-light"
+                             id="m_quicksearch" m-quicksearch-mode="default">
+
+                            <form class="m-header-search__form">
+                                <div class="m-header-search__wrapper">
+                                    <span class="m-header-search__icon-search" id="m_quicksearch_search">
+                                        <i class="flaticon-search"></i>
+                                    </span>
+                                    <span class="m-header-search__input-wrapper">
+                                        <input autocomplete="off" type="text" name="q" class="m-header-search__input" value="" placeholder="Search Components.."
+                                            id="m_quicksearch_input">
+                                    </span>
+                                    <span class="m-header-search__icon-close" id="m_quicksearch_close">
+                                        <i class="la la-remove"></i>
+                                    </span>
+                                    <span class="m-header-search__icon-cancel" id="m_quicksearch_cancel">
+                                        <i class="la la-remove"></i>
+                                    </span>
+                                </div>
+                            </form>
+                            &lt;!&ndash;END: Search Form &ndash;&gt;
+                            <div class="m-dropdown__wrapper">
+                                <div class="m-dropdown__arrow m-dropdown__arrow&#45;&#45;center"></div>
+                                <div class="m-dropdown__inner">
+                                    <div class="m-dropdown__body">
+                                        <div class="m-dropdown__scrollable m-scrollable" data-scrollable="true" data-height="300" data-mobile-height="200">
+                                            <div class="m-dropdown__content m-list-search m-list-search&#45;&#45;skin-light">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>-->
+                        <div class="m-stack__item m-topbar__nav-wrapper">
+                            <ul class="m-topbar__nav m-nav m-nav--inline">
+<!--                                <li class="m-nav__item m-topbar__notifications m-dropdown m-dropdown&#45;&#45;large m-dropdown&#45;&#45;arrow m-dropdown&#45;&#45;align-right 	m-dropdown&#45;&#45;mobile-full-width"
+                                    m-dropdown-toggle="click" m-dropdown-persistent="1">
+                                    <a href="#" class="m-nav__link m-dropdown__toggle" id="m_topbar_notification_icon">
+                                        <span class="m-nav__link-icon">
+                                            <span class="m-nav__link-icon-wrapper" id="notification-icon-wrapper">
+                                                <i class="la la-bell" style="font-size:2.0rem"></i>
+                                            </span>
+                                        </span>
+                                    </a>
+
+                                    <div class="m-dropdown__wrapper" style="right:-10px">
+                                        <span class="m-dropdown__arrow m-dropdown__arrow&#45;&#45;right"></span>
+                                        <div class="m-dropdown__inner">
+                                            <div class="m-dropdown__header m&#45;&#45;align-center">
+                                                <span class="m-dropdown__header-title" id="newNotificationsCount"></span>
+                                                <span class="m-dropdown__header-subtitle">new Notifications</span>
+                                                <button id="ackAllBtn" class="btn btn-success m-btn m-btn&#45;&#45;icon btn-sm  m-btn&#45;&#45;pill m-btn&#45;&#45;air">
+                                                    <i class="la la-check"></i> Acknowledge all
+                                                </button>
+                                            </div>
+                                            <div class="m-dropdown__body">
+                                                <div class="m-dropdown__content">
+                                                    <ul class="nav nav-tabs m-tabs m-tabs-line m-tabs-line&#45;&#45;brand" role="tablist">
+                                                        <li class="nav-item m-tabs__item">
+                                                            <a class="nav-link m-tabs__link active" data-toggle="tab" href="#topbar_notifications_notifications" role="tab">
+                                                                New
+                                                            </a>
+                                                        </li>
+                                                        <li class="nav-item m-tabs__item">
+                                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#topbar_notifications_events" role="tab">
+                                                                All
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content" id="notification-container">
+                                                        <div class="tab-pane active" id="topbar_notifications_notifications" role="tabpanel">
+                                                            <div class="m-scrollable" data-scrollable="true" data-height="250" data-mobile-height="200">
+                                                                <div class="m-list-timeline m-list-timeline&#45;&#45;skin-light">
+                                                                    <div class="m-list-timeline__items" id="notificationItems">
+                                                                    </div>
+                                                                    <div id="10" class="loadmorenew"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane" id="topbar_notifications_events" role="tabpanel">
+                                                            <div class="m-scrollable" data-scrollable="true" data-height="250" data-mobile-height="200">
+                                                                <div class="m-list-timeline m-list-timeline&#45;&#45;skin-light">
+                                                                    <div class="m-list-timeline__items" id="notificationsHistory">
+                                                                    </div>
+                                                                    <div id="10" class="loadmorehistory"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>-->
+                                {% if current_user is defined and current_user.is_authenticated %}
+                                <li class="m-nav__item m-topbar__user-profile  m-dropdown m-dropdown--medium m-dropdown--arrow  m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light"
+                                    m-dropdown-toggle="click">
+                                    <a href="#" class="m-nav__link m-dropdown__toggle">
+                                        <span class="m-topbar__userpic m--hide">
+                                            <img src="{{ url_for('static', filename='') }} " class="m--img-rounded m--marginless m--img-centered" alt="" />
+                                        </span>
+                                        <span class="m-nav__link-icon m-topbar__usericon">
+                                            <span class="m-nav__link-icon-wrapper">
+                                                <i class="la la-user" style="font-size:2.0rem"></i>
+                                            </span>
+                                        </span>
+                                        <span class="m-topbar__username m--hide">Nick</span>
+                                    </a>
+                                    <div class="m-dropdown__wrapper">
+                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                        <div class="m-dropdown__inner">
+                                            <div class="m-dropdown__header m--align-center">
+                                                <div class="m-card-user m-card-user--skin-light">
+                                                    <div class="m-card-user__pic">
+                                                        <img src="{{ url_for('static', filename='') }}" class="m--img-rounded m--marginless" alt="" />
+                                                    </div>
+                                                    <div class="m-card-user__details">
+                                                        <span class="m-card-user__name m--font-weight-500">{{current_user.displayname}}</span>
+                                                        <a href="" class="m-card-user__email m--font-weight-300 m-link">{{current_user.userprincipal}}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="m-dropdown__body">
+                                                <div class="m-dropdown__content">
+                                                    <ul class="m-nav m-nav--skin-light">
+                                                        <li class="m-nav__section m--hide">
+                                                            <span class="m-nav__section-text">Section</span>
+                                                        </li>
+                                                        <li class="m-nav__item">
+                                                            <a href="/Settings/UserManagement" class="m-nav__link">
+                                                                <i class="m-nav__link-icon flaticon-profile-1"></i>
+                                                                <span class="m-nav__link-title">
+                                                                    <span class="m-nav__link-wrap">
+                                                                        <span class="m-nav__link-text">My Profile</span>
+                                                                    </span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="m-nav__separator m-nav__separator--fit">
+                                                        </li>
+                                                        <li class="m-nav__item">
+                                                            <a href="/dashboard/faq" class="m-nav__link">
+                                                                <i class="m-nav__link-icon flaticon-info"></i>
+                                                                <span class="m-nav__link-text">FAQ</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="m-nav__item">
+                                                            <a href="mailto:handl.david89@gmail.com" class="m-nav__link">
+                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                <span class="m-nav__link-text">Support</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="m-nav__separator m-nav__separator--fit">
+                                                        </li>
+                                                        <li class="m-nav__item">
+                                                            <a href="{{ url_for('azure.logout') }}" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Logout</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- END: Topbar -->
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- END: Header -->
+    
+    <!-- begin::Body -->
+    <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+
+        <!-- BEGIN: Left Aside -->
+        <button class="m-aside-left-close  m-aside-left-close--skin-light " id="m_aside_left_close_btn">
+            <i class="la la-close"></i>
+        </button>
+        <div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-light ">
+
+            <!-- BEGIN: Brand -->
+            <div class="m-brand  m-brand--skin-light ">
+                <a href="{{ url_for('index') }}" class="m-brand__logo">
+                    <img alt="SVM" src="{{ url_for('static', filename='theme/images/svm_run_logo.jpg') }}"/>
+                </a>
+            </div>
+            <!-- END: Brand -->
+
+            <!-- BEGIN: Aside Menu -->
+            <div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-light m-aside-menu--submenu-skin-light "
+                 data-menu-vertical="true"
+                 m-menu-scrollable="true" m-menu-dropdown-timeout="500">
+                <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
+                    {% block sidemenu %}
+                    {% endblock %}
+                </ul>
+            </div>
+            <!-- END: Aside Menu -->
+        </div>
+        <div class="m-aside-menu-overlay"></div>
+        <!-- END: Left Aside -->
+
+        <div class="m-grid__item m-grid__item--fluid m-wrapper">
+            <div class="m-content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <!-- end:: Body -->
+
+    <!-- begin::Footer -->
+    {% block footer %}
+    <footer class="m-grid__item		m-footer ">
+        <div class="m-container m-container--fluid m-container--full-height m-page__container">
+            <div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
+                <div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
+                        <span class="m-footer__copyright">
+                            dhandl © 2020
+                        </span>
+                </div>
+                <div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
+                    <ul class="m-footer__nav m-nav m-nav--inline m--pull-right">
+                        <li class="m-nav__item">
+                            <a href="#"
+                               class="m-nav__link">
+                                <span class="m-nav__link-text">Imprint</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% endblock %}
+    <!-- end::Footer -->
+</div>
+<!-- end::Scroll Top -->
+
+<!-- begin::Quick Nav -->
+<!--begin:: Global Mandatory Vendors -->
+{% block latejs %}
+<script src="{{ url_for('static', filename='theme/theme/assets/vendors/jquery/dist/jquery.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='theme/theme/assets/vendors/popper.js/dist/umd/popper.js') }}"
+        type="text/javascript"></script>
+<!--    <script src="{{ url_for('static', filename='theme/theme/assets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"-->
+<!--            type="text/javascript"></script>-->
+<!-- <script src="{{url_for('static', filename='jquery-3.4.1.min.js')}}"></script> -->
+<script src="{{ url_for('static', filename='theme/theme/assets/vendors/js-cookie/src/js.cookie.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='theme/theme/assets/vendors/moment/min/moment.min.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='theme/theme/assets/vendors/tooltip.js/dist/umd/tooltip.min.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='theme/theme/assets/vendors/perfect-scrollbar/dist/perfect-scrollbar.js') }}"
+        type="text/javascript"></script>
+<script src="{{ url_for('static', filename='theme/theme/assets/vendors/wnumb/wNumb.js') }}"
+        type="text/javascript"></script>
+<!--end:: Global Mandatory Vendors -->
+
+<!--begin:: Global Optional Vendors -->
+<!--    <script src="theme/assets/vendors/jquery.repeater/src/lib.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/jquery.repeater/src/jquery.input.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/jquery.repeater/src/repeater.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/jquery-form/dist/jquery.form.min.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/block-ui/jquery.blockUI.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/js/framework/components/plugins/forms/bootstrap-datepicker.init.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/bootstrap-datetime-picker/js/bootstrap-datetimepicker.min.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/bootstrap-timepicker/js/bootstrap-timepicker.min.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/js/framework/components/plugins/forms/bootstrap-timepicker.init.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/js/framework/components/plugins/forms/bootstrap-daterangepicker.init.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/bootstrap-maxlength/src/bootstrap-maxlength.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/bootstrap-switch/dist/js/bootstrap-switch.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/js/framework/components/plugins/forms/bootstrap-switch.init.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/vendors/bootstrap-multiselectsplitter/bootstrap-multiselectsplitter.min.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/bootstrap-select/dist/js/bootstrap-select.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/select2/dist/js/select2.full.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/typeahead.js/dist/typeahead.bundle.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/handlebars/dist/handlebars.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/inputmask/dist/jquery.inputmask.bundle.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/inputmask/dist/inputmask/inputmask.date.extensions.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/inputmask/dist/inputmask/inputmask.numeric.extensions.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/inputmask/dist/inputmask/inputmask.phone.extensions.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/nouislider/distribute/nouislider.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/owl.carousel/dist/owl.carousel.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/autosize/dist/autosize.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/clipboard/dist/clipboard.min.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/ion-rangeslider/js/ion.rangeSlider.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/dropzone/dist/dropzone.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/summernote/dist/summernote.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/markdown/lib/markdown.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/bootstrap-markdown/js/bootstrap-markdown.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/js/framework/components/plugins/forms/bootstrap-markdown.init.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/jquery-validation/dist/jquery.validate.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/jquery-validation/dist/additional-methods.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/js/framework/components/plugins/forms/jquery-validation.init.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/bootstrap-notify/bootstrap-notify.min.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/js/framework/components/plugins/base/bootstrap-notify.init.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/toastr/build/toastr.min.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/jstree/dist/jstree.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/raphael/raphael.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/morris.js/morris.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/chartist/dist/chartist.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/chart.js/dist/Chart.bundle.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/js/framework/components/plugins/charts/chart.init.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/vendors/bootstrap-session-timeout/dist/bootstrap-session-timeout.min.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/vendors/jquery-idletimer/idle-timer.min.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/waypoints/lib/jquery.waypoints.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/counterup/jquery.counterup.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/es6-promise-polyfill/promise.min.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/sweetalert2/dist/sweetalert2.min.js" type="text/javascript"></script>-->
+<!--    <script src="theme/assets/vendors/js/framework/components/plugins/base/sweetalert2.init.js"-->
+<!--            type="text/javascript"></script>-->
+<!--    <link href="theme/assets/vendors/custom/datatables/datatables.bundle.css" rel="stylesheet"/>-->
+<!--    <script src="lib/jquery-bullseye.js"></script>-->
+<!--    <script src="lib/underscore-min.js"></script>-->
+<!--end:: Global Optional Vendors -->
+
+<!--begin::Global Theme Bundle -->
+<script src="{{ url_for('static', filename='theme/theme/assets/demo/base/scripts.bundle.js') }}"></script>
+<!--end::Global Theme Bundle -->
+
+<!--begin::Page Scripts -->
+<script src="{{ url_for('static', filename='theme/theme/assets/app/js/dashboard.js') }}"></script>
+<!--end::Page Scripts -->
+
+<script src="{{ url_for('static', filename='theme/lib/moment-with-locales.min.js') }}"></script>
+<script src="{{ url_for('static', filename='theme/lib/signalr/dist/browser/signalr.js') }}"></script>
+<script src="{{ url_for('static', filename='theme/lib/jquery-unobtrusive/jquery-unobtrusive.js') }}"></script>
+<!-- END CORE PLUGINS -->
+<!-- END THEME GLOBAL SCRIPTS -->
+
+<!-- BEGIN THEME LAYOUT SCRIPTS -->
+{% endblock %}
+</body>
+<!-- end::Body -->
+
+</html>

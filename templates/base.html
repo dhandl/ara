@@ -1,0 +1,16 @@
+{% extends 'base_theme.html' %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block sidemenu %}
+<li class="m-menu__item  m-menu__item--submenu m-menu__item--submenu-fullheight" aria-haspopup="true" m-menu-submenu-toggle="click"
+    m-menu-dropdown-toggle-class="m-aside-menu-overlay--on">
+    <a href="javascript:void(0)" class="m-menu__link" title="Actions">
+        <i class="m-menu__link-icon la la-calculator"></i>
+        <span class="m-menu__link-text">Lorem Ipsum</span>
+    </a>
+</li>
+
+{% endblock %}

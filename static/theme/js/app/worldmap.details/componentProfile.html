@@ -1,0 +1,97 @@
+﻿<div class="m-portlet m-portlet--full-height  ">
+    <div class="m-portlet__body">
+        <div class="m-card-profile">
+            <div class="m-card-profile__title m--hide">
+                Your Profile
+            </div>
+            <div class="m-card-profile__pic">
+                <div class="m-card-profile__pic-wrapper">
+                    <%= typeImage %>
+                </div>
+            </div>
+            <div class="m-card-profile__details">
+                <span class="m-card-profile__name"> <%= name %> </span>
+                <div>
+                    <% if (status.datastate.state === 0) { %>
+                    <i class="fa fa-circle" style="color:#25D366;font-size:12px"></i>
+                    <% } %>
+                    <% if (status.datastate.state === 1) { %>
+                    <i class="fa fa-circle" style="color:#20AB44;font-size:12px"></i>
+                    <% } %>
+                    <% if (status.datastate.state === 2) { %>
+                    <i class="fa fa-circle" style="color:#1A8120;font-size:12px"></i>
+                    <% } %>
+                    <% if (status.datastate.state === 3) { %>
+                    <i class="fa fa-circle" style="color:#6B6B6B;font-size:12px"></i>
+                    <% } %>
+
+                    <% if (status.datastate.lastUpdate) { %>
+                    <%= moment(moment.utc(status.datastate.lastUpdate).toDate()).local().format("DD.MM.YY, HH:mm:ss") %>
+                    <% } else { %>
+                    <span>Unknown Date</span>
+                    <% } %>
+                </div>
+                <div class="">
+                    <% if (status.onlinestate.state === "true") { %>
+                    <i class="fas fa-plug m--font-success"></i>
+                    <% } %>
+                    <% if (status.onlinestate.state === "false") { %>
+                    <i class="fas fa-plug m--font-danger"></i>
+                    <% } %>
+                    <% if (status.onlinestate.state === "unknown") { %>
+                    <i class="fas fa-plug m--font-metal"></i>
+                    <% } %>
+
+                    <% if (status.onlinestate.lastUpdate) { %>
+                    <%= moment(moment.utc(status.onlinestate.lastUpdate).toDate()).local().format("DD.MM.YY, HH:mm:ss") %>
+                    <% } else { %>
+                    <span>Unknown Date</span>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <ul class="m-nav m-nav--hover-bg m-portlet-fit--sides">
+            <li class="m-nav__separator m-nav__separator--fit"></li>
+            <li class="m-nav__item">
+                <a class="m-nav__link disabled">
+                    <i class="m-nav__link-icon la la-map-marker"></i>
+                    <span class="m-nav__link-title">
+                        <span class="m-nav__link-wrap">
+                            <span class="m-nav__link-text"><% if(geoinfo.city !== '-') { %><%= geoinfo.city %><% }%>, <% if(geoinfo.country !== '-') { %> <%= geoinfo.country %> <% } %></span>
+                        </span>
+                    </span>
+                </a>
+            </li>
+            <li class="m-nav__item">
+                <a class="m-nav__link">
+                    <i class="m-nav__link-icon la la-clock-o"></i>
+                    <span class="m-nav__link-text"><%= moment().utcOffset(parseInt(geoinfo.utcOffset)).format("HH:mm") %></span>
+                </a>
+            </li>
+            <li class="m-nav__item">
+                <a class="m-nav__link">
+                    <i class="m-nav__link-icon la la-key"></i>
+                    <span class="m-nav__link-text"><%= id %></span>
+                </a>
+            </li>
+            <% _.each(status.applications, function(application){ %>
+
+            <li class="m-nav__item">
+                <a href="<%= application.link %>" target="<%= application.name %>" class="m-nav__link">
+                    <i class="m-nav__link-icon la la-external-link"></i>
+                    <span class="m-nav__link-text text-capitalize"><%= application.name %></span>
+                </a>
+            </li>
+
+            <% }) %>
+
+
+            <li class="m-nav__item">
+                <a href="/apps/worldmap?id=<%= id %>" class="m-nav__link">
+                    <i class="m-nav__link-icon la la-reply"></i>
+                    <span class="m-nav__link-text">Return to map</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

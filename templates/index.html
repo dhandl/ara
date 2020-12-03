@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    {% block title %}ARA - Advanced running analytics{% endblock %}
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.css">
+{% endblock %}
+
+{% block content %}
+<!--begin::Portlet    Elements Details-->
+<div class="m-portlet m-portlet--default m-portlet--head-solid-bg m-portlet--head-sm"
+     m-portlet="true" id="m_portlet_details">
+    <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+                                    <span class="m-portlet__head-icon">
+                                        <i class="la la-bell"></i>
+                                        <!-- <i class="flaticon-placeholder-2"></i> -->
+                                    </span>
+                <h3 class="m-portlet__head-text">
+                    App
+                </h3>
+            </div>
+        </div>
+
+    </div>
+    <div class="m-portlet__body">
+        <div class="panel" id="panel_statusElt"></div>
+        Content
+    </div>
+</div>
+<!--end::Portlet-->
+
+<div id="likeBtn"></div><br>
+{% endblock %}
+
+{% block latejs %}
+{{ super() }}
+<script src="{{url_for('static', filename='code.js')}}"></script>
+
+
+<!-- load React -->
+<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>  
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+<!-- load React components -->
+<script src="{{url_for('static', filename='js/like_button.js')}}"></script>
+{% endblock %}

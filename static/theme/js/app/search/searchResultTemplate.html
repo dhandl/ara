@@ -1,0 +1,32 @@
+﻿<div class="m-list-search__results">
+
+    <% if (!searchResult || searchResult.length == 0) { %>
+
+    <span class="m-list-search__result-message">
+        No record found
+    </span>
+
+    <% } else { %>
+
+    <% _.each(searchResult, function(sr, i){ %>
+
+
+    <span class="m-list-search__result-category <% if (i == 0) {  %> m-list-search__result-category--first <% } %>">
+        <%= sr.name %>
+    </span>
+
+    <hr />
+
+    <% _.each(sr.components, function(component){ %>
+
+    <a href="/Apps/Worldmap?id=<%= component.id %>" class="m-list-search__result-item ml-4">
+        <span class="m-list-search__result-item-pic"><img class="m--img-rounded" src="/images/machines/<%= component.type %>.png" title="<%= component.type %>" style="width:30px" onerror="this.src = '/images/machines/questionmark.png';" /></span>
+        <span class="m-list-search__result-item-text"><%= component.name %></span>
+    </a>
+
+    <% }) %>
+    <% }) %>
+
+    <% } %>
+
+</div>

@@ -1,0 +1,32 @@
+﻿
+<div class="m-widget3">
+
+    <% _.each(journalItems, function(j){ %>
+
+    <div class="m-widget3__item">
+        <div class="m-widget3__header">
+            <div class="m-widget3__user-img">
+                <img class="m-widget3__img" src="../../../images/unknown_user.jpg" alt="">
+            </div>
+            <div class="m-widget3__info">
+                <span class="m-widget3__username">
+                    <%= j.editor %>
+                </span><br>
+                <span class="m-widget3__time">
+                    <%=  moment(j.timestamp).add(moment().utcOffset(), 'minutes').format('DD MMMM YYYY | HH:mm') %>
+                </span>
+            </div>
+            <!--<span class="m-widget3__status m--font-info">
+                Pending
+            </span>-->
+        </div>
+        <div class="m-widget3__body">
+            <p class="m-widget3__text">
+                <%= j.entry %>
+            </p>
+        </div>
+    </div>
+
+    <% }) %>
+
+</div>

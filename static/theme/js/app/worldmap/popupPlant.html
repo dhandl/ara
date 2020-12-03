@@ -1,0 +1,126 @@
+﻿<!-- Header  -->
+<div class="row">
+    <div class="col-md-3">
+
+        <% if (status.notificationsCount > 0) { %>
+        <span class="m-badge m-badge--danger" style="position: absolute;margin-top: 2px;"><%= status.notificationsCount %></span>
+        <% } %>
+
+        <%= typeImage %>
+    </div>
+    <div class="col-md-9 text-left" style="word-wrap:break-word">
+        <h6 class="m--font-boldest m--font-transform-u"><%= name %></h6>
+        <% if (geoinfo.city !== '-' && geoinfo.country !== '-') { %>
+        <div><span class="la la-map-marker"></span> <%= geoinfo.city %>, <%= geoinfo.country %></div>
+        <% } %>
+        <div><span class="la la-clock-o"></span> <%= moment().utcOffset(parseInt(geoinfo.utcOffset)).format("HH:mm") %> (UTC Offset <%= geoinfo.utcOffset %>)</div>
+    </div>
+    <hr class="col-xs-12" />
+</div>
+
+
+<p>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover" style="max-height: 170px;display:block;overflow-x:hidden;overflow-y:auto">
+            <thead></thead>
+            <tbody>
+                <% _.each(subcomponents, function(component){ %>
+
+                <tr>
+                    <td>
+                        <% if (status.datastate.state === 0) { %>
+                        <i class="fa fa-circle" style="color:#25D366;font-size:12px"></i>
+                        <% } %>
+                        <% if (status.datastate.state === 1) { %>
+                        <i class="fa fa-circle" style="color:#20AB44;font-size:12px"></i>
+                        <% } %>
+                        <% if (status.datastate.state === 2) { %>
+                        <i class="fa fa-circle" style="color:#1A8120;font-size:12px"></i>
+                        <% } %>
+                        <% if (status.datastate.state === 3) { %>
+                        <i class="fa fa-circle" style="color:#6B6B6B;font-size:12px"></i>
+                        <% } %>
+                    </td>
+                    <td>
+                        <%= component.name %>
+                    </td>
+
+                    <% _.each(component.properties.applications, function(application){ %>
+
+                    <td>
+                        <a target="dashboard" href="<%= application.link %>" title="<%= application.name %>" style="text-decoration:none">
+                            <% if (application.name == 'dashboard') { %>
+                            <i class="la la-dashboard"></i>
+                            <% }  else if (application.name == 'report') { %>
+                            <i class="la la-pie-chart"></i>
+                            <% }  else if (application.name == 'statistics') { %>
+                            <i class="fas fa-chart-line fa-4x fa-disabled"></i>
+                            <% }  else if (application.name == 'machineview') { %>
+                            <i class="la la-image"></i>
+                            <% } else { %>
+                            <i class="la la-question-circle"></i>
+                            <% } %>
+                        </a>
+                    </td>
+
+                    <% }) %>
+
+                </tr>
+                <% }) %>
+
+            </tbody>
+        </table>
+    </div>
+</p>
+
+<div class="row" style="margin-top: -15px;padding-bottom: 15px;">
+    <div class="col-md-12 text-center">
+        <a href="/Apps/Worldmap/Plants/<%= id %>" class="btn m-btn--pill btn-brand btn-sm">Details</a>
+    </div>
+</div>
+
+
+<div class="row mt-2">
+    <div class="col-sm-12 text-left">
+        <% if (status.onlinestate.state === "true") { %>
+        <i class="fas fa-plug m--font-success"></i>
+        <% } %>
+        <% if (status.onlinestate.state === "false") { %>
+        <i class="fas fa-plug m--font-danger"></i>
+        <% } %>
+        <% if (status.onlinestate.state === "unknown") { %>
+        <i class="fas fa-plug m--font-metal"></i>
+        <% } %>
+
+        <% if (status.onlinestate.lastUpdate) { %>
+        <%= status.onlinestate.lastUpdate %>
+        <% } else { %>
+        <span>Date of last update is unknown</span>
+        <% } %>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-left">
+        <% if (status.datastate.state === 0) { %>
+        <i class="fa fa-circle" style="color:#25D366;font-size:12px"></i>
+        <% } %>
+        <% if (status.datastate.state === 1) { %>
+        <i class="fa fa-circle" style="color:#20AB44;font-size:12px"></i>
+        <% } %>
+        <% if (status.datastate.state === 2) { %>
+        <i class="fa fa-circle" style="color:#1A8120;font-size:12px"></i>
+        <% } %>
+        <% if (status.datastate.state === 3) { %>
+        <i class="fa fa-circle" style="color:#6B6B6B;font-size:12px"></i>
+        <% } %>
+
+        <% if (status.datastate.lastUpdate) { %>
+        <%= status.datastate.lastUpdate %>
+        <% } else { %>
+        <span>Date of last update is unknown</span>
+        <% } %>
+    </div>
+</div>
+<!-- Footer begins here -->
+
+<!--  -->

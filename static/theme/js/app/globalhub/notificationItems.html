@@ -1,0 +1,9 @@
+﻿<%_.forEach(notifications, function (n) {%>
+
+<div class="m-list-timeline__item">
+    <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
+    <span style="cursor:pointer" id="<%=JSON.parse(n.componentMessage).id%>" class="m-list-timeline__text"><%=JSON.parse(n.componentMessage).headline%></span>
+    <span class="m-list-timeline__time"><%= moment(JSON.parse(n.componentMessage).created).add(moment().utcOffset(), 'minutes').format('DD MMMM YYYY | HH:mm') %></span>
+</div>
+
+<%})%>

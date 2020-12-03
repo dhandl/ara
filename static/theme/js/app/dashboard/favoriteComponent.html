@@ -1,0 +1,227 @@
+﻿<%_.forEach(favorites, function (f) {%>
+
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <!--begin::Section-->
+            <div class="m-accordion m-accordion--default m-accordion--toggle-arrow" id="m_accordion_<%= f.basetype %>" role="tablist">
+
+                <!--begin::Item-->
+                <div class="m-accordion__item m-accordion__item--brand">
+                    <div onclick="setLastSelection('<%= f.basetype %>')" class="m-accordion__item-head collapsed" role="tab" id="<%= f.basetype %>_head" data-toggle="collapse" href="#<%= f.basetype %>_body" aria-expanded="<%= f.selected ?  'true' : 'false' %>">
+                        <!--<span class="m-accordion__item-icon"><i class="fa flaticon-user-ok"></i></span>-->
+                        <span class="m-accordion__item-title"><%= f.basetype %></span>
+                        <span class="m-accordion__item-mode"></span>
+                    </div>
+                    <div class="m-accordion__item-body collapse <%= f.selected ?  'show' : '' %>" id="<%= f.basetype %>_body" role="tabpanel" aria-labelledby="<%= f.basetype %>_head" data-parent="#m_accordion_<%= f.basetype %>">
+                        <div class="m-accordion__item-content" style="background-color:#F1F2F7">
+                            <p>
+                                <div class="row">
+
+                                    <!--end::Section-->
+                                    <%_.forEach(f.components, function (component) {%>
+
+                                    <div class="col-xl-4 col-md-6 col-sm-12">
+
+                                        <!--begin:: Widgets/New Users-->
+                                        <div class="m-portlet m-portlet--full-height ">
+                                            <div class="m-portlet__head">
+                                                <div class="m-portlet__head-tools">
+                                                    <ul class="nav nav-pills nav-pills--brand m-nav-pills--align-right m-nav-pills--btn-pill m-nav-pills--btn-sm" role="tablist">
+                                                        <li class="nav-item m-tabs__item">
+                                                            <a class="nav-link m-tabs__link active" data-toggle="tab" href="#general<%= component.properties.id %>" role="tab">
+                                                                General
+                                                            </a>
+                                                        </li>
+                                                        <li id="favTabNotifications-<%= component.properties.id %>" class="nav-item m-tabs__item">
+                                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#notifications<%= component.properties.id %>" role="tab">
+                                                                Notifications
+                                                            </a>
+                                                        </li>
+                                                        <li id="favTabStatistics-<%= component.properties.id %>" class="nav-item m-tabs__item">
+                                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#statistics<%= component.properties.id %>" role="tab">
+                                                                Statistics
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="m-portlet__body">
+                                                <div class="tab-content" style="min-height:290px">
+                                                    <div class="tab-pane active" id="general<%= component.properties.id %>">
+
+                                                        <!-- Header  -->
+                                                        <div class="row">
+                                                            <div class="col-3">
+
+                                                                <% if (component.properties.status.notificationsCount > 0) { %>
+                                                                <span class="m-badge m-badge--danger" style="position: absolute;margin-top: 2px;"><%= component.properties.status.notificationsCount %></span>
+                                                                <% } %>
+
+                                                                <img class="m--img-rounded" src="/images/machines/<%= component.properties.type %>.png" title="<%= component.properties.type %>" style="width:60px" onerror="this.src = '/images/machines/questionmark.png';" />
+                                                            </div>
+                                                            <div class="col-9 text-left" style="word-wrap:break-word">
+                                                                <div class="row">
+                                                                    <h4 class="m--font-boldest m--font-transform-u"><a href="/apps/worldmap/<%= component.properties.basetype %>s/<%= component.properties.id %>"><%= component.properties.name %></a></h4>
+                                                                    <span class="ml-2">
+                                                                        <% if (component.properties.status.datastate.state === 0) { %>
+                                                                        <i class="fa fa-circle" style="color:#25D366;font-size:12px"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.datastate.state === 1) { %>
+                                                                        <i class="fa fa-circle" style="color:#20AB44;font-size:12px"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.datastate.state === 2) { %>
+                                                                        <i class="fa fa-circle" style="color:#1A8120;font-size:12px"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.datastate.state === 3) { %>
+                                                                        <i class="fa fa-circle" style="color:#6B6B6B;font-size:12px"></i>
+                                                                        <% } %>
+                                                                    </span>
+                                                                    <span class="ml-1">
+                                                                        <% if (component.properties.status.onlinestate.state === "true") { %>
+                                                                        <i class="fas fa-plug m--font-success"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.onlinestate.state === "false") { %>
+                                                                        <i class="fas fa-plug m--font-danger"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.onlinestate.state === "unknown") { %>
+                                                                        <i class="fas fa-plug m--font-metal"></i>
+                                                                        <% } %>
+                                                                    </span>
+                                                                </div>
+                                                                <% if (component.properties.geoinfo.city !== '-' && component.properties.geoinfo.country !== '-') { %>
+                                                                <div class="row"><span class="la la-map-marker"></span> <%= component.properties.geoinfo.city %>, <%= component.properties.geoinfo.country %></div>
+                                                                <% } %>
+                                                                <div class="row"><span class="la la-clock-o"></span> <%= moment().utcOffset(parseInt(component.properties.geoinfo.utcOffset)).format("HH:mm") %> (UTC Offset <%= component.properties.geoinfo.utcOffset %>)</div>
+                                                            </div>
+                                                        </div>
+
+                                                        <ul class="m-nav m-nav--hover-bg m-portlet-fit--sides">
+                                                            <li class="m-nav__separator m-nav__separator--fit"></li>
+                                                            <div style="max-height:150px;overflow-y:auto">
+
+                                                                <% _.each(component.properties.status.applications, function(application){ %>
+
+                                                                <li class="m-nav__item">
+                                                                    <a href="<%= application.link %>" target="<%= application.name %>" class="m-nav__link">
+                                                                        <i class="m-nav__link-icon la la-external-link"></i>
+                                                                        <span class="m-nav__link-text text-capitalize"><%= application.name %></span>
+                                                                    </a>
+                                                                </li>
+
+                                                                <% }) %>
+
+                                                            </div>
+                                                        </ul>
+
+                                                    </div>
+                                                    <div class="tab-pane" id="notifications<%= component.properties.id %>">
+                                                        <div class="row">
+                                                            <div class="col-md-2 text-right">
+
+                                                                <% if (component.properties.status.notificationsCount > 0) { %>
+                                                                <span class="m-badge m-badge--danger" style="position: absolute;margin-top: 2px;"><%= component.properties.status.notificationsCount %></span>
+                                                                <% } %>
+
+                                                                <img class="m--img-rounded" src="/images/machines/<%= component.properties.type %>.png" title="<%= component.properties.type %>" style="width:20px" onerror="this.src = '/images/machines/questionmark.png';" />
+                                                            </div>
+                                                            <div class="col-md-10 text-left" style="word-wrap:break-word">
+                                                                <div class="row">
+                                                                    <h5 class="m--font-boldest m--font-transform-u"><a href="/apps/worldmap/<%= component.properties.basetype %>s/<%= component.properties.id %>"><%= component.properties.name %></a></h5>
+                                                                    <span class="ml-2">
+                                                                        <% if (component.properties.status.datastate.state === 0) { %>
+                                                                        <i class="fa fa-circle" style="color:#25D366;font-size:12px"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.datastate.state === 1) { %>
+                                                                        <i class="fa fa-circle" style="color:#20AB44;font-size:12px"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.datastate.state === 2) { %>
+                                                                        <i class="fa fa-circle" style="color:#1A8120;font-size:12px"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.datastate.state === 3) { %>
+                                                                        <i class="fa fa-circle" style="color:#6B6B6B;font-size:12px"></i>
+                                                                        <% } %>
+                                                                    </span>
+                                                                    <span class="ml-1">
+                                                                        <% if (component.properties.status.onlinestate.state === "true") { %>
+                                                                        <i class="fas fa-plug m--font-success"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.onlinestate.state === "false") { %>
+                                                                        <i class="fas fa-plug m--font-danger"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.onlinestate.state === "unknown") { %>
+                                                                        <i class="fas fa-plug m--font-metal"></i>
+                                                                        <% } %>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>                                                    <hr />
+                                                        <div id="notificationsContainer<%= component.properties.id %>">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="statistics<%= component.properties.id %>">
+                                                        <div class="row">
+                                                            <div class="col-md-2 text-right">
+
+                                                                <% if (component.properties.status.notificationsCount > 0) { %>
+                                                                <span class="m-badge m-badge--danger" style="position: absolute;margin-top: 2px;"><%= component.properties.status.notificationsCount %></span>
+                                                                <% } %>
+
+                                                                <img class="m--img-rounded" src="/images/machines/<%= component.properties.type %>.png" title="<%= component.properties.type %>" style="width:20px" onerror="this.src = '/images/machines/questionmark.png';" />
+                                                            </div>
+                                                            <div class="col-md-10 text-left" style="word-wrap:break-word">
+                                                                <div class="row">
+                                                                    <h5 class="m--font-boldest m--font-transform-u"><a href="/apps/worldmap/<%= component.properties.basetype %>s/<%= component.properties.id %>"><%= component.properties.name %></a></h5>
+                                                                    <span class="ml-2">
+                                                                        <% if (component.properties.status.datastate.state === 0) { %>
+                                                                        <i class="fa fa-circle" style="color:#25D366;font-size:12px"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.datastate.state === 1) { %>
+                                                                        <i class="fa fa-circle" style="color:#20AB44;font-size:12px"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.datastate.state === 2) { %>
+                                                                        <i class="fa fa-circle" style="color:#1A8120;font-size:12px"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.datastate.state === 3) { %>
+                                                                        <i class="fa fa-circle" style="color:#6B6B6B;font-size:12px"></i>
+                                                                        <% } %>
+                                                                    </span>
+                                                                    <span class="ml-1">
+                                                                        <% if (component.properties.status.onlinestate.state === "true") { %>
+                                                                        <i class="fas fa-plug m--font-success"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.onlinestate.state === "false") { %>
+                                                                        <i class="fas fa-plug m--font-danger"></i>
+                                                                        <% } %>
+                                                                        <% if (component.properties.status.onlinestate.state === "unknown") { %>
+                                                                        <i class="fas fa-plug m--font-metal"></i>
+                                                                        <% } %>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>        <hr />
+                                                        <div id="statisticsContainer<%= component.properties.id %>">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--end:: Widgets/New Users-->
+                                    </div>
+
+                                    <%})%>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--end::Item-->
+            </div>
+        </div>
+    </div>
+</div>
+<%})%>

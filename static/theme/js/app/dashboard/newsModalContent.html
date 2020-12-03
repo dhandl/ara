@@ -1,0 +1,96 @@
+﻿
+<div class="tabbable-line">
+    <ul class="nav nav-tabs ">
+        <li class="active">
+            <a href="#tab_unread" data-toggle="tab"> Unread News </a>
+        </li>
+        <li>
+            <a href="#tab_history" data-toggle="tab"> History </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab_unread">
+
+            <% if(_.size(news.unread) > 0) { %>
+
+            <div class="news-container">
+                <div class="timeline">
+                    <% _(news.unread).each(function(n) { %>
+
+                    <div class="timeline-item">
+                        <div class="timeline-badge">
+                            <div class="timeline-icon">
+                                <%= (n.type.toUpperCase() === 'IMPORTANT') ? '<i class="fa fa-exclamation-circle font-red"></i> ' :  (n.type.toUpperCase() === 'INFO') ? '<i class="icon-info font-blue"></i> ' : (n.type.toUpperCase() === 'WARNING') ? '<i class="fa fa-exclamation-circle font-yellow"></i> ' : ''  %>
+                            </div>
+                        </div>
+                        <div class="timeline-body">
+                            <div class="timeline-body-arrow"> </div>
+                            <div class="timeline-body-head">
+                                <div class="timeline-body-head-caption">
+                                    <span class="timeline-body-title font-blue-madison uppercase bold">
+
+                                        <%= n.title %>
+
+                                    </span>
+                                    <span class="timeline-body-time font-grey-cascade"><%= n.created %></span>
+                                </div>
+                            </div>
+                            <div class="timeline-body-content">
+                                <span class="font-grey-cascade">
+                                    <%= n.body %>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <% }) %>
+                </div>
+            </div>
+
+            <% }  else { %>
+            <div class="uppercase text-center"><i class="fa fa-check-circle-o font-green"></i> No News found, you are still up to date!</div>
+            <% } %>
+        </div>
+        <div class="tab-pane" id="tab_history">
+
+            <% if(_.size(news.history) > 0) { %>
+            <div class="news-container">
+                <div class="timeline">
+                    <% _(news.history).each(function(n) { %>
+
+                    <div class="timeline-item">
+                        <div class="timeline-badge">
+                            <div class="timeline-icon">
+                                <%= (n.type.toUpperCase() === 'IMPORTANT') ? '<i class="fa fa-exclamation-circle font-red"></i> ' :  (n.type.toUpperCase() === 'INFO') ? '<i class="icon-info font-blue"></i> ' : (n.type.toUpperCase() === 'WARNING') ? '<i class="fa fa-exclamation-circle font-yellow"></i> ' : ''  %>
+                            </div>
+                        </div>
+                        <div class="timeline-body">
+                            <div class="timeline-body-arrow"> </div>
+                            <div class="timeline-body-head">
+                                <div class="timeline-body-head-caption">
+                                    <span class="timeline-body-title font-blue-madison uppercase bold">
+
+                                        <%= n.title %>
+
+                                    </span>
+                                    <span class="timeline-body-time font-grey-cascade"><%= n.created %></span>
+                                </div>
+                            </div>
+                            <div class="timeline-body-content">
+                                <span class="font-grey-cascade">
+                                    <%= n.body %>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <% }) %>
+                </div>
+            </div>
+            <% }  else { %>
+            <div class="uppercase text-center"><i class="fa fa-check-circle-o font-green"></i> No news found in your history!</div>
+            <% } %>
+
+        </div>
+    </div>
+</div>
