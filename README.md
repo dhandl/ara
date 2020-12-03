@@ -1,10 +1,5 @@
-# Flask Template
+# Web Application for my advanced running analytics
  
-```git clone https://vmcarvaloo-analytics.westeurope.cloudapp.azure.com/tkPI/flask_template_indigo.git```
+```git clone https://github.com/dhandl/ara.git```
 
-```cd flask_template_indigo/```
-
-```git submodule init```
-
-```git submodule update```
-
+```cd ara/```
