@@ -1,0 +1,8 @@
+flask
+werkzeug
+flask-dance[sqla]
+flask-login
+flask-sqlalchemy
+blinker
+flask-caching
+sqlalchemy-utils

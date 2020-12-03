@@ -1,0 +1,24 @@
+{
+  "name": "bergziege",
+  "version": "1.0.0",
+  "description": "```git clone https://vmcarvaloo-analytics.westeurope.cloudapp.azure.com/tkPI/flask_template_indigo.git```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhandl/ara.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dhandl/ara/issues"
+  },
+  "homepage": "https://github.com/dhandl/ara#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2"
+  }
+}
